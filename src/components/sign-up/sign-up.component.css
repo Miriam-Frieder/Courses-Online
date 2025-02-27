@@ -1,0 +1,59 @@
+.signup-card {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #f7f9fc; /* Light background for a clean look */
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between; /* Title on the left and button on the right */
+    align-items: center; /* Center align items vertically */
+    position: relative; /* Allows absolute positioning of the title */
+    margin-bottom: 16px;
+}
+
+.signup-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center; /* Center the title */
+    flex: 1; /* Allow the title to take up available space */
+}
+
+.close-button {
+    color: #666;
+    transition: color 0.3s; /* Smooth transition for hover effect */
+    position: absolute; /* Position the button absolutely within the header */
+    right: 0; /* Align it to the right */
+}
+
+.close-button:hover {
+    color: red; /* Change to red on hover */
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.signup-button {
+    width: 100%;
+    margin-top: 16px;
+    color: white; /* Text color for the button */
+}
+
+.login-prompt {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-prompt a {
+    text-decoration: none; /* Remove underline from link */
+}
+
+.login-prompt a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

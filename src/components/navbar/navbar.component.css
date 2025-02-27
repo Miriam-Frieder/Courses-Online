@@ -1,0 +1,10 @@
+.rounded-button {
+    border-radius: 25px; /* Make buttons rounded */
+    margin-left: 15px; /* Increase space between buttons */
+    text-transform: uppercase; /* Make text uppercase */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
+.mat-stroked-button {
+    border-radius: 25px; /* Ensure the outlined button is also rounded */
+}

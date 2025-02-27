@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { LoginComponent } from '../components/login/login.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NavbarComponent } from "../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // Corrected to styleUrls
 })
-export class AppComponent {
-  title = 'online-curses';
+export class AppComponent implements OnInit {
+  constructor(private dialog: MatDialog) {}
+
+  ngOnInit() {
+    // this.openLoginDialog();
+  }
+
 }

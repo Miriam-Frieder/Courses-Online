@@ -1,0 +1,18 @@
+@use '@angular/material' as mat; // Use this instead of @import
+
+html {
+  color-scheme: light dark;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$blue-palette, // Example color palette
+    ),
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}

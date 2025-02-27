@@ -1,0 +1,40 @@
+    <mat-card class="login-card">
+        <div class="dialog-header">
+            <mat-card-title mat-dialog-title class="login-title">
+                Login
+            </mat-card-title>
+            <button mat-icon-button class="close-button" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <mat-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="email" required />
+                    @if(loginForm.get('email')?.hasError('required'))
+                    {
+                    <mat-error>Email is required</mat-error>
+                    }
+                    @if(loginForm.get('email')?.hasError('email'))
+                    {
+                    <mat-error>Invalid email format</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="form-field">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password" required />
+                    @if(loginForm.get('password')?.hasError('required'))
+                    {
+                    <mat-error>Password is required</mat-error>
+                    }
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" class="login-button">Login</button>
+            </form>
+            <div class="signup-prompt">
+                <span>Don't have an account? </span>
+                <a (click)="openSignUpDialog()">Sign up</a>
+            </div>
+        </mat-card-content>
+    </mat-card>

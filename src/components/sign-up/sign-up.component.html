@@ -1,0 +1,53 @@
+<mat-card class="signup-card">
+    <div class="dialog-header">
+        <mat-card-title class="signup-title">
+            Sign Up
+        </mat-card-title>
+        <button mat-icon-button class="close-button" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <mat-card-content>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" required />
+                @if(signUpForm.get('email')?.hasError('required'))
+                {
+                <mat-error>Email is required</mat-error>
+                }
+                @if(signUpForm.get('email')?.hasError('email'))
+                {
+                <mat-error>Invalid email format</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" required />
+                @if(signUpForm.get('password')?.hasError('required'))
+                {
+                <mat-error>Password is required</mat-error>
+                } </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-field">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmPassword" type="password" required />
+                @if(signUpForm.get('confirmPassword')?.hasError('required'))
+                {
+                <mat-error>Confirm Password is required</mat-error>
+                }
+                @if(signUpForm.hasError('mismatch'))
+                {
+                <mat-error>Passwords do not match</mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" class="signup-button">Sign Up</button>
+        </form>
+    </mat-card-content>
+    <div class="login-prompt">
+        <span>Already have an account? </span>
+        <a (click)="openLoginDialog()">Login</a>
+    </div>
+</mat-card>
