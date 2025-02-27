@@ -1,4 +1,4 @@
-type Role = 'admin' | 'student' | 'teacher';
+export type Role = 'admin' | 'student' | 'teacher';
 export class UserModel {
     constructor(
         public id: number,

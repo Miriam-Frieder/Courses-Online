@@ -56,14 +56,8 @@ export class LoginComponent implements OnInit {
 
    onSubmit(): void {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
-        response => {
-          sessionStorage.setItem('token', response.token);
-        },
-        error => {
-          console.error('Error logging in', error);
-        }
-      );
+      this.authService.login(this.loginForm.value).subscribe(()=> this.dialog.closeAll())
     }
+   
    }
 }

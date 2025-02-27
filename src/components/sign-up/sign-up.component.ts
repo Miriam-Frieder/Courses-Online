@@ -18,19 +18,21 @@ import {
 } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
+import { MatOption } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
   imports: [
-      MatDialogModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDialogClose
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogClose,
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
@@ -39,36 +41,33 @@ export class SignUpComponent {
   signUpForm: FormGroup;
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private authService: AuthService) {
-      this.signUpForm = this.fb.group({
-          email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required]],
-          confirmPassword: ['', [Validators.required]]
-      }, { validators: this.passwordMatchValidator });
+    this.signUpForm = this.fb.group({
+      username: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      role: ['student', Validators.required]
+    }, { validators: this.passwordMatchValidator });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   passwordMatchValidator(form: FormGroup) {
-      return form.get('password')?.value === form.get('confirmPassword')?.value ? null : { mismatch: true };
+    return form.get('password')?.value === form.get('confirmPassword')?.value ? null : { mismatch: true };
   }
 
   onSubmit(): void {
-      if (this.signUpForm.valid) {
-          const signUpData = this.signUpForm.value;
-          this.authService.register(this.signUpForm.value).subscribe(
-            response => {
-              console.log('User registered successfully', response);
-            },
-            error => {
-              console.error('Error registering user', error);
-            }
-          );
-          console.log(signUpData);
-      }
+    if (this.signUpForm.valid) {
+      const { username, email, password, role } = this.signUpForm.value;
+      this.authService.register({ username, email, password, role }).subscribe(
+         ()=> this.openLoginDialog()
+      );
+    }
+    
   }
 
   openLoginDialog(): void {
     this.dialog.closeAll();
-    this.dialog.open(LoginComponent); 
+    this.dialog.open(LoginComponent);
   }
 }
