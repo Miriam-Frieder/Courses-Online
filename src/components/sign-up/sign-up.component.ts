@@ -42,7 +42,7 @@ export class SignUpComponent {
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, private authService: AuthService) {
     this.signUpForm = this.fb.group({
-      username: [''],
+      name: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
@@ -58,8 +58,8 @@ export class SignUpComponent {
 
   onSubmit(): void {
     if (this.signUpForm.valid) {
-      const { username, email, password, role } = this.signUpForm.value;
-      this.authService.register({ username, email, password, role }).subscribe(
+      const { name, email, password, role } = this.signUpForm.value;
+      this.authService.register({ name, email, password, role }).subscribe(
          ()=> this.openLoginDialog()
       );
     }

@@ -24,11 +24,13 @@ export class AuthService {
   constructor(private http: HttpClient,private userService: UserService) {}
 
   register(user: Omit<UserModel,'id'>): Observable<RegisterResponse> {
+    console.log(user);
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, user).pipe(
       tap(response => {
+        console.log(response);
         const registeredUser: UserModel = {
           id: response.userId, 
-          username: user.username,
+          name: user.name,
           email: user.email,
           password: user.password, 
           role: user.role
@@ -43,7 +45,7 @@ export class AuthService {
       tap(response => {
         const currentUser: UserModel = {
           id: response.userId, 
-          username: response.username,
+          name: response.username,
           email: credentials.email,
           password: credentials.password, 
           role: response.role
