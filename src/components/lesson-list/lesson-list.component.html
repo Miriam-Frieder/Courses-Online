@@ -4,11 +4,13 @@
     </mat-card-header>
     <mat-card-content>
       <mat-list>
-        <mat-list-item *ngFor="let lesson of lessons">
+        @for(let lesson of lessons;track lesson.id){
+        <mat-list-item>
           <h3 matLine>{{ lesson.title }}</h3>
           <p matLine>{{ lesson.content }}</p>
           <small>Course ID: {{ lesson.courseId }}</small>
         </mat-list-item>
+    }
       </mat-list>
     </mat-card-content>
   </mat-card>
