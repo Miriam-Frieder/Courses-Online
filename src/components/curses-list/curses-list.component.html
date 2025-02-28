@@ -1,1 +1,12 @@
-<p>curses-list works!</p>
+<div class="courses-list">
+    <h2>Courses List</h2>
+    <mat-list>
+    @for(let course of courses;track course.id){
+      <mat-list-item  (click)="navigateToCourseDetail(course.id)">
+        <h3 mat-line>{{ course.title }}</h3>
+        <p mat-line>{{ course.description }}</p>
+      </mat-list-item>
+    }
+    </mat-list>
+  </div>
+  

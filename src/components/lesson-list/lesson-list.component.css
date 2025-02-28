@@ -1,0 +1,16 @@
+.lesson-list {
+    margin: 20px;
+  }
+  
+  mat-card {
+    background-color: #fff; /* Default background */
+  }
+  
+  mat-list-item {
+    border-bottom: 1px solid #e0e0e0; /* Light gray border */
+  }
+  
+  mat-list-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
+  }
+  

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {  Routes  } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
 import { CursesListComponent } from '../components/curses-list/curses-list.component';
 import { LessonListComponent } from '../components/lesson-list/lesson-list.component';
