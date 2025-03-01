@@ -20,6 +20,11 @@ import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
 import { MatOption } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app/store/app.state';
+import { Observable } from 'rxjs';
+import { UserModel } from '../../models/user.model';
+import { register } from '../../app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-sign-up',
@@ -39,8 +44,10 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class SignUpComponent {
   signUpForm: FormGroup;
+  authUser$!: Observable<UserModel | null>;
+  authError$!: Observable<any>;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private store:Store<AppState>) {
     this.signUpForm = this.fb.group({
       name: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -57,13 +64,13 @@ export class SignUpComponent {
   }
 
   onSubmit(): void {
+    console.log(this.signUpForm.value);
     if (this.signUpForm.valid) {
       const { name, email, password, role } = this.signUpForm.value;
-      this.authService.register({ name, email, password, role }).subscribe(
-         ()=> this.openLoginDialog()
-      );
+      this.store.dispatch(register({ user: { name, email, password, role } }));
+      console.log('Submitted');
     }
-    
+    this.openLoginDialog();
   }
 
   openLoginDialog(): void {

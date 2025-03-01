@@ -1,15 +1,15 @@
-@use '@angular/material' as mat; // Use this instead of @import
+@use '@angular/material' as mat;
 
 html {
   color-scheme: light dark;
 
-  @include mat.theme((
-    color: (
-      primary: mat.$blue-palette, // Example color palette
-    ),
-    typography: Roboto,
-    density: 0
-  ));
+  // Define your primary and accent colors directly
+  --primary-color: #02182a; // Example primary color
+  --accent-color: #5d7179; // Example accent color
+
+  // Set the theme colors
+  --mat-primary: var(--primary-color);
+  --mat-accent: var(--accent-color);
 }
 
 body {

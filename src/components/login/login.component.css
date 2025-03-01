@@ -73,3 +73,28 @@
 .signup-prompt a:hover {
     text-decoration: underline;
 }
+
+.form-field {
+    width: 100%;
+    margin-bottom: 16px; /* Increase margin for better spacing */
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 16px; /* Ensure there's space above the button */
+}
+
+.signup-prompt {
+    margin-top: 16px; /* Space above the sign-up prompt */
+    text-align: center;
+    font-size: 14px;
+}
+.mat-form-field {
+    width: 100%;
+    margin-bottom: 16px; /* Space between fields */
+}
+
+.mat-input-element {
+    font-size: 16px; /* Increase font size */
+    padding: 12px; /* Increase padding for larger input area */
+}

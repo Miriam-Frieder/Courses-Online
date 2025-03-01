@@ -19,6 +19,11 @@ import {
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserModel } from '../../models/user.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app/store/app.state';
+import { login } from '../../app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -39,8 +44,10 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  authUser$!: Observable<UserModel | null>;
+  authError$!: Observable<any>;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog,private authService: AuthService) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private store: Store<AppState>) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -54,10 +61,13 @@ export class LoginComponent implements OnInit {
     this.dialog.open(SignUpComponent); 
   }
 
-   onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(()=> this.dialog.closeAll())
-    }
    
-   }
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.store.dispatch(login({ email, password }));
+    }
+    this.dialog.closeAll();
+
+  }
 }

@@ -1,1 +1,18 @@
-<p>curses-list works!</p>
+<div class="courses-list">
+    <h2>Courses List</h2>
+    <mat-list>
+    @for(course of courses$|async;track course.id){
+      <mat-list-item  (click)="navigateToCourseDetail(course.id)">
+        {{ course.title }} -
+        {{ course.description }}
+      </mat-list-item>
+    }
+    @empty {
+      <div class="spinner-container">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+    </mat-list>
+  </div>
+  <router-outlet></router-outlet>
+  
