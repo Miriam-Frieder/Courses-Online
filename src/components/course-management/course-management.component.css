@@ -1,0 +1,31 @@
+.courses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .course-item {
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .course-details {
+    display: inline;
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .course-actions {
+    display: inline;
+    gap: 10px;
+  }
+  
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }

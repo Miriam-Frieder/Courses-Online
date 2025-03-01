@@ -1,1 +1,26 @@
-<p>course-management works!</p>
+<div class="courses-list">
+    <h2>Courses List</h2>
+    <button mat-raised-button color="primary" (click)="addCourse()">Add Course</button>
+    <mat-list>
+    @for(course of courses$|async;track course.id){
+        <div class="course-details" (click)="navigateToCourseDetail(course.id)">
+            <h3 mat-line>{{ course.title }}</h3>
+            <p mat-line>{{ course.description }}</p>
+          </div>
+          <div class="course-actions">
+            <button mat-icon-button color="accent" (click)="editCourse(course)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteCourse(course.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+    }
+    @empty {
+      <div class="spinner-container">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+    </mat-list>
+  </div>
+  <router-outlet></router-outlet>
