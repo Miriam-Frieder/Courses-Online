@@ -4,7 +4,7 @@
   <mat-list>
     @for(course of courses$|async;track course.id){
     <div class="course-details" (click)="navigateToCourseDetail(course.id)">
-      <button mat-button>
+      <button mat-button [appHighlightCourse]="course.teacherId">
       {{ course.title }} -
       {{ course.description }}
     </button >

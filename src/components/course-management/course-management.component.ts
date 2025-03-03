@@ -19,6 +19,7 @@ import { LessonModel } from '../../models/lesson.model';
 import { loadLessons } from '../../app/store/actions/lesson.actions';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LessonManagementComponent } from '../lesson-management/lesson-management.component';
+import { HighlightCourseDirective } from '../../directives/highlight-course.directive';
 
 
 @Component({
@@ -29,7 +30,8 @@ import { LessonManagementComponent } from '../lesson-management/lesson-managemen
   MatButtonModule, MatIconModule,
    RouterModule, AsyncPipe,
     ReactiveFormsModule,
-    LessonManagementComponent
+    LessonManagementComponent,
+    HighlightCourseDirective
   ],
   templateUrl: './course-management.component.html',
   styleUrls: ['./course-management.component.css']
