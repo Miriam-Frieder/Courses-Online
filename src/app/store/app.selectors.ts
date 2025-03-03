@@ -3,7 +3,6 @@ import { AppState } from './app.state';
 import { UserModel } from '../../models/user.model';
 import { CourseModel } from '../../models/course.model';
 import { LessonModel } from '../../models/lesson.model';
-import { EnrollmentModel } from '../../models/enrollment.model';
 
 // Selectors for users
 export const selectUsers = (state: AppState) => state.users;

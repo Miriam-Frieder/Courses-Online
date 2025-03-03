@@ -1,7 +1,6 @@
 import { UserModel } from '../../models/user.model';
 import { CourseModel } from '../../models/course.model';
 import { LessonModel } from '../../models/lesson.model';
-import { EnrollmentModel } from '../../models/enrollment.model';
 
 export interface AuthState {
   authUser: UserModel | null;
