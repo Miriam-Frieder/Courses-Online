@@ -3,18 +3,24 @@ import { CourseModel } from '../../models/course.model';
 import { LessonModel } from '../../models/lesson.model';
 import { EnrollmentModel } from '../../models/enrollment.model';
 
+export interface AuthState {
+  authUser: UserModel | null;
+  error: any;
+}
+
 export interface AppState {
-    users: UserModel[];
-    courses: CourseModel[];
-    lessons: LessonModel[];
-    enrollments: EnrollmentModel[];
-    authUser: UserModel | null;
+  users: UserModel[];
+  courses: CourseModel[];
+  lessons: LessonModel[];
+  auth: AuthState;
 }
 
 export const initialState: AppState = {
-    users: [],
-    courses: [],
-    lessons: [],
-    enrollments: [],
-    authUser: null
+  users: [],
+  courses: [],
+  lessons: [],
+  auth: {
+    authUser: null,
+    error: null
+  }
 };

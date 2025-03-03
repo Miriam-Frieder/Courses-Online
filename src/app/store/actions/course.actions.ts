@@ -20,3 +20,11 @@ export const updateCourseFailure = createAction('[Course] Update Course Failure'
 export const deleteCourse = createAction('[Course] Delete Course', props<{ id: number }>());
 export const deleteCourseSuccess = createAction('[Course] Delete Course Success', props<{ id: number }>());
 export const deleteCourseFailure = createAction('[Course] Delete Course Failure', props<{ error: any }>());
+
+export const enrollStudent = createAction('[Course] Enroll Student', props<{ courseId: number, userId: number }>());
+export const enrollStudentSuccess = createAction('[Course] Enroll Student Success', props<{ courseId: number, userId: number }>());
+export const enrollStudentFailure = createAction('[Course] Enroll Student Failure', props<{ error: any }>());
+
+export const unenrollStudent = createAction('[Course] Unenroll Student', props<{ courseId: number, userId: number }>());
+export const unenrollStudentSuccess = createAction('[Course] Unenroll Student Success', props<{ courseId: number, userId: number }>());
+export const unenrollStudentFailure = createAction('[Course] Unenroll Student Failure', props<{ error: any }>());

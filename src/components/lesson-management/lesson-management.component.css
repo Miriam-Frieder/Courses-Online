@@ -1,0 +1,19 @@
+.lesson-details {
+    flex: 1;
+    padding-left: 100px;
+  }
+  
+  mat-list-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  .lesson-actions{
+    padding-left: 70px;
+
+  }
+
+ 

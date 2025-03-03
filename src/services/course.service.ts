@@ -12,34 +12,33 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<CourseModel[]> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.get<CourseModel[]>(this.apiUrl, { headers });
+    return this.http.get<CourseModel[]>(this.apiUrl);
   }
 
   getCourseById(id: number): Observable<CourseModel> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.get<CourseModel>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.get<CourseModel>(`${this.apiUrl}/${id}`);
   }
 
   createCourse(course: CourseModel): Observable<CourseModel> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.post<CourseModel>(this.apiUrl, course, { headers });
+    return this.http.post<CourseModel>(this.apiUrl, course);
   }
 
   updateCourse(id: number, course: CourseModel): Observable<CourseModel> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.put<CourseModel>(`${this.apiUrl}/${id}`, course, { headers });
+    return this.http.put<CourseModel>(`${this.apiUrl}/${id}`, course);
   }
 
   deleteCourse(id: number): Observable<void> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  private createAuthorizationHeader(): HttpHeaders {
-    const token = localStorage.getItem('token'); // או כל דרך אחרת לאחסון ה-token
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+  
+  enrollStudent(courseId: number, userId: number): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${courseId}/enroll`, { userId });
   }
+
+  unenrollStudent(courseId: number, userId: number): Observable<void> {
+    return this.http.request<void>('delete', `${this.apiUrl}/${courseId}/unenroll`, {  body: { userId } });
+  }
+
+  
 }

@@ -51,7 +51,7 @@ export class AuthService {
           role: response.role
         };        
         this.userService.setCurrentUser(currentUser);
-        sessionStorage.setItem('token1', response.token);
+        sessionStorage.setItem('token', response.token);
       })
     );
   }

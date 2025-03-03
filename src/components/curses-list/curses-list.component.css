@@ -1,6 +1,31 @@
+.courses-list {
+  padding: 20px;
+}
+
+mat-list-item {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin-right: 10px;
+}
+
+.course-details {
+  flex: 1;
+  cursor: pointer;
+}
+
+.lesson-details {
+  padding-left: 40px;
+}
+
 .spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.item-list{
+  display: block;
+}

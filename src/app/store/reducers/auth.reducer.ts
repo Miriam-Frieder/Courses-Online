@@ -1,27 +1,57 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 import { loginSuccess, loginFailure, registerSuccess, registerFailure, logout } from '../actions/auth.actions';
+import { AuthState } from '../app.state';
 import { UserModel } from '../../../models/user.model';
-import { Action, ActionReducer } from '@ngrx/store';
-
-export interface AuthState {
-  user: UserModel | null;
-  error: any;
-}
 
 export const initialAuthState: AuthState = {
-  user: null,
+  authUser: null,
   error: null
 };
 
 const _authReducer = createReducer(
   initialAuthState,
-  on(loginSuccess, (state, { user }) => ({ ...state, user, error: null })),
-  on(loginFailure, (state, { error }) => ({ ...state, user: null, error })),
-  on(registerSuccess, (state, { user }) => ({ ...state, user, error: null })),
-  on(registerFailure, (state, { error }) => ({ ...state, user: null, error })),
-  on(logout, state => ({ ...state, user: null, error: null }))
+  on(loginSuccess, (state, { user }) => {
+    console.log('Login Success:', user);
+    return {
+      ...state,
+      authUser: user,
+      error: null
+    };
+  }),
+  on(loginFailure, (state, { error }) => {
+    console.log('Login Failure:', error);
+    return {
+      ...state,
+      authUser: null,
+      error
+    };
+  }),
+  on(registerSuccess, (state, { user }) => {
+    console.log('Register Success:', user);
+    return {
+      ...state,
+      authUser: user,
+      error: null
+    };
+  }),
+  on(registerFailure, (state, { error }) => {
+    console.log('Register Failure:', error);
+    return {
+      ...state,
+      authUser: null,
+      error
+    };
+  }),
+  on(logout, state => {
+    console.log('Logout');
+    return {
+      ...state,
+      authUser: null,
+      error: null
+    };
+  })
 );
 
 export function authReducer(state: AuthState | undefined, action: Action): AuthState {
-    return _authReducer(state, action);
+  return _authReducer(state, action);
 }

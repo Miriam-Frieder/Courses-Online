@@ -1,26 +1,35 @@
 <div class="courses-list">
-    <h2>Courses List</h2>
-    <button mat-raised-button color="primary" (click)="addCourse()">Add Course</button>
-    <mat-list>
+  <h2>Courses List</h2>
+  <button mat-raised-button color="primary" (click)="addCourse()">Add Course</button>
+  <mat-list>
     @for(course of courses$|async;track course.id){
-        <div class="course-details" (click)="navigateToCourseDetail(course.id)">
-            <h3 mat-line>{{ course.title }}</h3>
-            <p mat-line>{{ course.description }}</p>
-          </div>
-          <div class="course-actions">
-            <button mat-icon-button color="accent" (click)="editCourse(course)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="deleteCourse(course.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
+    <div class="course-details" (click)="navigateToCourseDetail(course.id)">
+      <button mat-button>
+      {{ course.title }} -
+      {{ course.description }}
+    </button >
+    </div>
+    <div class="course-actions">
+      <button mat-icon-button color="accent" (click)="editCourse(course)" matTooltip="edit course">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteCourse(course.id)" matTooltip="delete course">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="toggleLessons(course.id)" matTooltip="show lessons">
+        <mat-icon>menu_book</mat-icon>
+      </button>
+    </div>
+    @if(selectedCourseId === course.id){
+      <app-lesson-management [courseId]="course.id"></app-lesson-management>
+
+    }
     }
     @empty {
-      <div class="spinner-container">
-        <mat-spinner></mat-spinner>
-      </div>
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
     }
-    </mat-list>
-  </div>
-  <router-outlet></router-outlet>
+  </mat-list>
+</div>
+<router-outlet></router-outlet>

@@ -1,24 +1,24 @@
-import { Component, Inject, InjectionToken } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import {  MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
 @Component({
-  selector: 'app-course-form-dialog',
+  selector: 'app-lesson-form-dialog',
   standalone: true,
   imports: [ MatDialogModule, MatFormFieldModule,
       MatInputModule, ReactiveFormsModule,
       MatButton
       
-  ],
-  templateUrl: './course-form-dialog.component.html',
-  styleUrl: './course-form-dialog.component.css'
+  ],  
+  templateUrl: './lesson-form-dialog.component.html',
+  styleUrl: './lesson-form-dialog.component.css'
 })
-export class CourseFormDialogComponent {
+export class LessonFormDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<CourseFormDialogComponent>,
+    public dialogRef: MatDialogRef<LessonFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { form: FormGroup, isEditMode: boolean }
   ) {}
 
@@ -32,5 +32,3 @@ export class CourseFormDialogComponent {
     }
   }
 }
-
-

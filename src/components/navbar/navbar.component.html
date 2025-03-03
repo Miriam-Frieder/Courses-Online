@@ -3,13 +3,18 @@
         <mat-toolbar-row class="navbar">
             <div fxFlex fxLayoutAlign="start center">
                 <a mat-button routerLink="/" color="primary" class="rounded-button">Home</a>
-                <a mat-button routerLink="/courses" color="primary" class="rounded-button">Courses</a>
+                @if((authUser$ | async)?.role==='teacher')
+                {
                 <a mat-button routerLink="/course-management" color="primary" class="rounded-button">Manage Courses</a>
+                }
+                <a mat-button routerLink="/courses" color="primary" class="rounded-button">Courses</a>
             </div>
 
             <div fxFlex fxLayoutAlign="end center">
-                <button mat-flat-button color="primary" class="rounded-button" (click)="openLoginDialog()">Login</button>
-                <button mat-stroked-button color="primary" class="rounded-button" (click)="openSignUpDialog()">Sign Up</button>
+                <button mat-flat-button color="primary" class="rounded-button"
+                    (click)="openLoginDialog()">Login</button>
+                <button mat-stroked-button color="primary" class="rounded-button" (click)="openSignUpDialog()">Sign
+                    Up</button>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>

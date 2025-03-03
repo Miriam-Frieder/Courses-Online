@@ -1,0 +1,24 @@
+@if(courseId != null)
+{
+<button mat-icon-button color="primary" (click)="addLesson()" matTooltip="Add Lesson">
+    <mat-icon>add</mat-icon>
+</button>
+<mat-list>
+    <h3>Lessons List</h3>
+    @for(lesson of lessons$ | async;track lesson.id){
+    <div class="lesson-details">
+        {{ lesson.title }} - {{ lesson.content }}
+    </div>
+    <div class="lesson-actions">
+        <button class="lesson-button" mat-icon-button color="accent" (click)="editLesson(lesson)"
+            matTooltip="Edit Lesson">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button class="lesson-button" mat-icon-button color="warn" (click)="deleteLesson(lesson.id)"
+            matTooltip="Delete Lesson">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    }
+</mat-list>
+}

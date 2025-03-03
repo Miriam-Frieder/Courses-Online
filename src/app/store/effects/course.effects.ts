@@ -8,9 +8,16 @@ import {
   loadCourse, loadCourseSuccess, loadCourseFailure,
   createCourse, createCourseSuccess, createCourseFailure,
   updateCourse, updateCourseSuccess, updateCourseFailure,
-  deleteCourse, deleteCourseSuccess, deleteCourseFailure
+  deleteCourse, deleteCourseSuccess, deleteCourseFailure,
+  unenrollStudent,
+  unenrollStudentSuccess,
+  unenrollStudentFailure,
+  enrollStudent,
+  enrollStudentSuccess,
+  enrollStudentFailure
 } from '../actions/course.actions';
 import { CourseModel } from '../../../models/course.model';
+import { response } from 'express';
 
 @Injectable()
 export class CourseEffects {
@@ -43,19 +50,27 @@ export class CourseEffects {
       ofType(createCourse),
       mergeMap(action =>
         this.courseService.createCourse(action.course).pipe(
-          map(course => createCourseSuccess({ course })),
+          map((response:any)=> {
+            const course={
+              id: response.courseId,
+              title: action.course.title,
+              description: action.course.description,
+              teacherId: action.course.teacherId,
+            }
+            return createCourseSuccess({ course });
+          },
           catchError(error => of(createCourseFailure({ error })))
         )
       )
     )
-  );
+  ));
 
   updateCourse$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCourse),
       mergeMap(action =>
         this.courseService.updateCourse(action.id, action.course).pipe(
-          map(course => updateCourseSuccess({ course })),
+          map(course => { console.log(course); return updateCourseSuccess({ course: action.course }); }),
           catchError(error => of(updateCourseFailure({ error })))
         )
       )
@@ -73,6 +88,31 @@ export class CourseEffects {
       )
     )
   );
+
+  enrollStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(enrollStudent),
+      mergeMap(action =>
+        this.courseService.enrollStudent(action.courseId, action.userId).pipe(
+          map(() => enrollStudentSuccess({ courseId: action.courseId, userId: action.userId })),
+          catchError(error => of(enrollStudentFailure({ error })))
+        )
+      )
+    )
+  );
+
+  unenrollStudent$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(unenrollStudent),
+      mergeMap(action =>
+        this.courseService.unenrollStudent(action.courseId, action.userId).pipe(
+          map(() => unenrollStudentSuccess({ courseId: action.courseId, userId: action.userId })),
+          catchError(error => of(unenrollStudentFailure({ error })))
+        )
+      )
+    )
+  );
+
 
   constructor(
     private actions$: Actions,

@@ -1,19 +1,8 @@
-.lesson-list {
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Add space between items */
+.lessons-list {
+  padding: 20px;
 }
 
 mat-card {
-  background-color: #fff; /* Default background */
-}
-
-mat-list-item {
-  border-bottom: 1px solid #e0e0e0; /* Light gray border */
-  padding: 10px; /* Optional: Add padding for better spacing */
-}
-
-mat-list-item:last-child {
-  border-bottom: none; /* Remove border for the last item */
+  width: 100%;
+  margin-bottom: 10px;
 }

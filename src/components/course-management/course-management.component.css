@@ -5,7 +5,6 @@
   }
   
   .course-item {
-    display: block;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
@@ -13,7 +12,6 @@
   }
   
   .course-details {
-    display: inline;
     flex: 1;
     cursor: pointer;
   }

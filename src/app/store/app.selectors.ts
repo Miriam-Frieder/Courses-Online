@@ -29,13 +29,9 @@ export const selectLessonById = (lessonId: number) => createSelector(
   (lessons: LessonModel[]) => lessons.find(lesson => lesson.id === lessonId)
 );
 
-// Selectors for enrollments
-export const selectEnrollments = (state: AppState) => state.enrollments;
-
-export const selectEnrollmentById = (enrollmentId: number) => createSelector(
-  selectEnrollments,
-  (enrollments: EnrollmentModel[]) => enrollments.find(enrollment => enrollment.id === enrollmentId)
-);
-
 // Selectors for authenticated user
-export const selectAuthUser = (state: AppState) => state.authUser;
+export const selectAuthState = (state: AppState) => state.auth;
+
+export const selectAuthUser = createSelector(
+  selectAuthState,
+  (authState) => authState.authUser);

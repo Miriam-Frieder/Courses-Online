@@ -12,30 +12,43 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../app/store/app.state';
 import { loadCourses, createCourse, updateCourse, deleteCourse } from '../../app/store/actions/course.actions';
 import { AsyncPipe } from '@angular/common';
-import {  ReactiveFormsModule } from '@angular/forms';
-import { selectCourses } from '../../app/store/app.selectors';
+import { ReactiveFormsModule } from '@angular/forms';
+import { selectCourses, selectLessons } from '../../app/store/app.selectors';
 import { CourseFormDialogComponent } from '../course-form-dialog/course-form-dialog.component';
+import { LessonModel } from '../../models/lesson.model';
+import { loadLessons } from '../../app/store/actions/lesson.actions';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LessonManagementComponent } from '../lesson-management/lesson-management.component';
 
 
 @Component({
   selector: 'app-course-management',
   standalone: true,
-  imports: [MatListModule, MatProgressSpinnerModule, MatButtonModule, MatIconModule, RouterModule, AsyncPipe, ReactiveFormsModule],
+  imports: [MatListModule,  MatTooltipModule, 
+  MatProgressSpinnerModule, 
+  MatButtonModule, MatIconModule,
+   RouterModule, AsyncPipe,
+    ReactiveFormsModule,
+    LessonManagementComponent
+  ],
   templateUrl: './course-management.component.html',
   styleUrls: ['./course-management.component.css']
 })
 export class CourseManagementComponent implements OnInit {
   courses$: Observable<CourseModel[]>;
+  lessons$: Observable<LessonModel[]>;
+
   courseForm: FormGroup;
   isEditMode = false;
   selectedCourseId: number | null = null;
 
   constructor(private store: Store<AppState>, private router: Router, private fb: FormBuilder, private dialog: MatDialog) {
     this.courses$ = this.store.select(selectCourses);
+    this.lessons$ = this.store.select(selectLessons);
     this.courseForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      teacherId: [1, Validators.required] 
+      teacherId: [1, Validators.required]
     });
   }
 
@@ -43,8 +56,17 @@ export class CourseManagementComponent implements OnInit {
     this.store.dispatch(loadCourses());
   }
 
+  toggleLessons(courseId: number): void {
+    if (this.selectedCourseId === courseId) {
+      this.selectedCourseId = null;
+    } else {
+      this.selectedCourseId = courseId;
+      this.store.dispatch(loadLessons({ courseId }));
+    }
+  }
+
   navigateToCourseDetail(courseId: number): void {
-    this.router.navigate(['/courses', courseId]);
+    this.router.navigate(['/course-management', courseId]);
   }
 
   deleteCourse(courseId: number): void {
