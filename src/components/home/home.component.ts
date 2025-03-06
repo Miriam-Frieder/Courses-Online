@@ -29,11 +29,15 @@ export class HomeComponent {
   }
 
   start() {
-    if (this.authUser$) {
-      this.router.navigate(['/courses']);
-    }
-    else {
-      alert("Please login to continue");
-    }
+    this.authUser$.subscribe(
+      (user) => {
+        if(user){
+          this.router.navigate(['/courses']);
+        } else {
+          alert("Please login to continue");
+        }
+      }
+    )
+  
   }
 }

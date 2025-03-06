@@ -7,7 +7,9 @@
                 {
                 <a mat-button routerLink="/course-management" color="primary" class="rounded-button">Manage Courses</a>
                 }
+                @if((authUser$ | async)?.role!==null){
                 <a mat-button routerLink="/courses" color="primary" class="rounded-button">Courses</a>
+                }
             </div>
 
             <div fxFlex fxLayoutAlign="end center">
