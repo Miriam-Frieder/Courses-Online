@@ -3,6 +3,8 @@ import { HomeComponent } from '../components/home/home.component';
 import { CursesListComponent } from '../components/curses-list/curses-list.component';
 import { CurseDetailComponent } from '../components/curse-detail/curse-detail.component';
 import { CourseManagementComponent } from '../components/course-management/course-management.component';
+import { authGuard } from '../guards/auth.guard';
+import { teacherGuard } from '../guards/teacher.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -12,7 +14,9 @@ export const routes: Routes = [
             {
                 path: ':id', component: CurseDetailComponent,
             },
-        ]
+        ],
+        canActivate:[authGuard]
+        
     },
     {
         path: 'course-management', component: CourseManagementComponent,
@@ -20,7 +24,8 @@ export const routes: Routes = [
             {
                 path: ':id', component: CurseDetailComponent,
             },
-        ]
+        ],
+        canActivate:[teacherGuard]
     },
 
 ];

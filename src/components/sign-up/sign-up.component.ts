@@ -70,7 +70,8 @@ export class SignUpComponent {
       this.store.dispatch(register({ user: { name, email, password, role } }));
       console.log('Submitted');
     }
-    this.openLoginDialog();
+    this.dialog.closeAll();
+
   }
 
   openLoginDialog(): void {

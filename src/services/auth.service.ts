@@ -6,7 +6,9 @@ import { UserService } from './user.service';
 
 interface RegisterResponse {
   message: string,
-  userId: number
+  userId: number,
+  token: string,
+  role: Role,
 }
 
 interface LoginResponse{
@@ -33,9 +35,11 @@ export class AuthService {
           name: user.name,
           email: user.email,
           password: user.password, 
-          role: user.role
+          role: response.role
         };      
         this.userService.setCurrentUser(registeredUser); 
+        sessionStorage.setItem('token', response.token);
+
       })
     )
   }

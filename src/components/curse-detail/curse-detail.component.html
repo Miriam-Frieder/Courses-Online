@@ -9,8 +9,12 @@
       <p>{{ (course$ | async)?.description }}</p>
     </mat-card-content>
     <mat-card-actions>
+      @if (!(isEnrolled$|async)) {
       <button mat-button (click)="enroll()">Enroll</button>
+      }
+      @else{
       <button mat-button color="warn" (click)="leave()">Leave Course</button>
+      }
     </mat-card-actions>
   </mat-card>
 </ng-container>
